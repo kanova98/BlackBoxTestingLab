@@ -1,11 +1,10 @@
+package src;
 import java.util.Arrays;
 
 public class Mergesort{
-    /**
-     * 
-     * @param A - unsorted int array
-     * @return
-     */
+    
+    //@ requires A != null && A.length >= 1
+    //@ ensures (\forall int i; 0 <= i < A.length-1; A[i+1] > A[i]) 
     public int[] sort(int[] A){
         if(A.length == 1){
             return A; // An array with one element is by default sorted
@@ -37,6 +36,7 @@ public class Mergesort{
         int[] toReturn = new int[lower.length + upper.length];
 
 
+        
         while(lowptr < lower.length && highptr < upper.length){
             if(lower[lowptr] <= upper[highptr]){
                 toReturn[lowptr + highptr] = lower[lowptr];
