@@ -1,16 +1,17 @@
 package src;
+import java.io.IOException;
 import java.util.Random;
 
 public class Main{
     
     public static void main(String[] args){
-
-        Random rng = new Random();
-        int[] testarray = new int[40];
-        for(int i = 0; i < 40; i++){
-            testarray[i] = rng.nextInt(100);
+        
+        try {
+            RandomTestCaseGenerator gen = new RandomTestCaseGenerator();
+        } catch (IOException e) {
+            
+            e.printStackTrace();
         }
-        System.out.println(member(testarray, 3));
     }
 
     public static boolean member(int[] A, int key){
