@@ -14,7 +14,7 @@ public class RandomTestCaseGenerator{
 
     private static final int numberOfTestCases = 100;
 
-    private static final int arraySize = 15;
+    private static final int arraySize = 10;
 
     File testCaseFile = new File("random_test_cases.txt");
 
