@@ -6,27 +6,33 @@ public class Main{
     
     public static void main(String[] args){
         
-        try {
-            RandomTestCaseGenerator gen = new RandomTestCaseGenerator();
-        } catch (IOException e) {
+        if(args.length != 0){
             
+            if(args[0].equals("generate")){
+                try {
+                    new PairwiseTestCaseGenerator();
+                    new RandomTestCaseGenerator();
+                } catch (IOException e) {
+                    
+                    e.printStackTrace();
+                }
+            }else{
+                System.err.println("Write generate to generate new test cases");
+            }
+        }
+        
+        try {
+            new TestRunner();
+        } catch (IOException e) {
+            System.err.println("IO exception");
             e.printStackTrace();
         }
+
+
+    
     }
 
-    public static boolean member(int[] A, int key){
-        Mergesort sorter = new Mergesort();
-        A = sorter.sort(A);
-        Binarysearch searcher = new Binarysearch();
-        int index = searcher.search(A, key);
-
-        if(index == -1){
-            return false;
-        }
-        else{
-            return true;
-        }
-    }
+    
 
 }
 

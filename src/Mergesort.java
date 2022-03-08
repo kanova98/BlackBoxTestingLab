@@ -3,15 +3,17 @@ import java.util.Arrays;
 
 public class Mergesort{
     
-    //@ requires A != null && A.length >= 1
-    //@ ensures (\forall int i; 0 <= i < A.length-1; A[i+1] > A[i]) 
+    
     public int[] sort(int[] A){
         if(A.length == 1){
             return A; // An array with one element is by default sorted
         }
+        
         int mid = A.length / 2;
         int[] first = Arrays.copyOfRange(A, 0, mid);
+
         int[] second = Arrays.copyOfRange(A, mid, A.length);
+        //int[] second = Arrays.copyOfRange(A, mid+ 1, A.length); // MUTATION 6
 
         return merge(first,second);
     }
@@ -33,6 +35,7 @@ public class Mergesort{
 
         int lowptr = 0;
         int highptr = 0;
+        
         int[] toReturn = new int[lower.length + upper.length];
 
 
@@ -40,6 +43,7 @@ public class Mergesort{
         while(lowptr < lower.length && highptr < upper.length){
             if(lower[lowptr] <= upper[highptr]){
                 toReturn[lowptr + highptr] = lower[lowptr];
+                //toReturn[lowptr] = lower[lowptr]; // MUTATION 4
                 lowptr++;
             }
             else{
@@ -54,8 +58,10 @@ public class Mergesort{
             }
         }
         else if(highptr < upper.length){
-            while(highptr < upper.length){
+            while(highptr < upper.length){ 
+                
                 toReturn[lowptr + highptr] = upper[highptr];
+                //toReturn[lowptr + highptr] = toReturn[highptr]; // MUTATION 5
                 highptr++;
             }
         }

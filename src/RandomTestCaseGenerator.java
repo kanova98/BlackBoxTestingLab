@@ -10,31 +10,48 @@ import java.util.stream.IntStream;
 /*
  * Class to generate random test cases and write them to file
 */
-public class RandomTestCaseGenerator{
+public class RandomTestCaseGenerator extends TestCaseGenerator{
 
-    private static final int numberOfTestCases = 100;
+    private static final int numberOfTestCases = 500;
 
-    private static final int arraySize = 10;
+    private static final int arraySize = 100;
 
-    File testCaseFile = new File("random_test_cases.txt");
+    public static final File testCaseFile = new File("tests/random_test_cases.txt");
 
     public RandomTestCaseGenerator() throws IOException{
 
         FileWriter writer = new FileWriter(testCaseFile);
-
-        int testsWritten = 0;
-
+        //System.err.println("Writing random test cases to file");
+        
         /*
         *  Generate random testCases 
         */
         Random rng = new Random();
         for(int i = 0; i < numberOfTestCases; i++ ){
-            int[] arr = new int[arraySize];
+            int[] arr = new int[arraySize + 1];
 
-            IntStream asStream = rng.ints(-1000,1000);
-            arr = asStream.toArray();
+            int checkValue;
+            for(int j = 0; j < arraySize; j++){
+                arr[j] = rng.nextInt(101);
+                checkValue =  rng.nextInt(2);
+                if(checkValue == 1){
+                    arr[j] = arr[j] * -1;
+                }
+                
+            }
+            
+            
+            checkValue = rng.nextInt(2);
+            if(checkValue == 1){
+                arr[arr.length-1] = 101;
+            }
+            else{
+                arr[arr.length-1] = arr[rng.nextInt(arraySize)];
+            }
 
-            writer.write(Arrays.toString(arr));
+            
+
+            writer.write(arrayRepresentation(arr));
             writer.write("\n");
             
         }
